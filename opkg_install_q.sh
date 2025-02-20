@@ -28,13 +28,6 @@ else
     exit 1
 fi
 
-# 前置检查 q 是否已安装
-if command -v q &> /dev/null; then
-    echo "`q` 已安装，版本：$(q --version)"
-    echo "无需执行安装，退出脚本。"
-    exit 0
-fi
-
 # 根据用户输入进行处理
 case "$choice" in
     1)
@@ -42,7 +35,16 @@ case "$choice" in
         echo "开始检测并安装必要的工具..."
 
         # ================================
-        # 1. 检查是否已安装 Git
+        # 1. 前置检查 `q` 是否已安装
+        # ================================
+        if command -v q &> /dev/null; then
+            echo "`q` 已安装，版本：$(q --version)"
+            echo "无需执行安装，退出脚本。"
+            exit 0
+        fi
+
+        # ================================
+        # 2. 检查是否已安装 Git
         # ================================
         if command -v git &> /dev/null; then
             echo "Git 已安装，版本：$(git --version)"
@@ -53,7 +55,7 @@ case "$choice" in
         fi
 
         # ================================
-        # 2. 检查是否已安装 Go (版本 >= 1.22)
+        # 3. 检查是否已安装 Go (版本 >= 1.22)
         # ================================
         GO_VERSION=$(go version | awk '{print $3}' | cut -d'.' -f2)
         if command -v go &> /dev/null && [ "$GO_VERSION" -ge 22 ]; then
@@ -79,7 +81,7 @@ case "$choice" in
         fi
 
         # ================================
-        # 3. 安装 `q`
+        # 4. 安装 `q`
         # ================================
         echo "开始安装 `q`..."
         go install github.com/natesales/q@latest > /dev/null 2>&1
@@ -99,10 +101,11 @@ case "$choice" in
         # 卸载部分
         echo "正在卸载 q..."
 
-        # 卸载 `q`
-        if command -v q &> /dev/null; then
+        # 查找 `q` 可执行文件路径
+        Q_BIN=$(go env GOPATH)/bin/q
+        if [ -f "$Q_BIN" ]; then
             # 删除 `q` 可执行文件
-            rm -f $(go env GOPATH)/bin/q
+            rm -f "$Q_BIN"
             echo "`q` 已卸载！"
             
             # 删除环境变量配置
