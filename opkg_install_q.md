@@ -22,10 +22,16 @@ curl -LO https://raw.githubusercontent.com/HenryChiao/My-one-click-script/main/o
 ### 2. 添加执行权限
 
 下载完成后，给脚本添加执行权限。
+```bash
+chmod +x opkg_install_q.sh
+```
 
 ### 3. 运行脚本
 
 运行脚本时，系统会提示你选择操作。
+```bash
+./opkg_install_q.sh
+```
 
 ### 输入选项：
 
