@@ -54,6 +54,9 @@ chmod +x opkg_install_q.sh
 ### 5. 重新加载环境
 
 安装完成后，脚本会提示你重新进入 SSH 终端，或者执行命令来使环境变量生效。
+```bash
+source ~/.profile
+```
 
 ## 许可证
 
