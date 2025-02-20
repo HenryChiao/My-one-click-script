@@ -67,6 +67,10 @@ chmod +x opkg_install_q.sh
 ```bash
 source ~/.profile
 ```
+### 6. 清除脚本
+```bash
+rm -f opkg_install_q.sh
+```
 
 ## 许可证
 
