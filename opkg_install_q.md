@@ -15,9 +15,9 @@
 
 首先，使用 `curl` 命令下载脚本。
 
-bash
+```bash
 curl -LO https://raw.githubusercontent.com/HenryChiao/My-one-click-script/main/opkg_install_q.sh`
-
+```
 
 ### 2. 添加执行权限
 
